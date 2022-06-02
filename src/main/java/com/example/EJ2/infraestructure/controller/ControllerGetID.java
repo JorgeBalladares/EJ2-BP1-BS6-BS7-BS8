@@ -1,5 +1,6 @@
 package com.example.EJ2.infraestructure.controller;
 
+import com.example.EJ2.Exception.Customizer.NotFoundException;
 import com.example.EJ2.application.PersonaImpl;
 import com.example.EJ2.infraestructure.dto.PersonaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class ControllerGetID {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.getByID(id));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            //return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            throw new NotFoundException("Valor no encontrado");
         }
     }
 }

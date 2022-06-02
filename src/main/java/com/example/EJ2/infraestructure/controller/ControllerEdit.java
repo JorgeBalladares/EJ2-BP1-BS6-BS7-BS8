@@ -1,5 +1,7 @@
 package com.example.EJ2.infraestructure.controller;
 
+import com.example.EJ2.Exception.Customizer.NotFoundException;
+import com.example.EJ2.Exception.Customizer.UnprocesableException;
 import com.example.EJ2.application.PersonaImpl;
 import com.example.EJ2.infraestructure.dto.PersonaDTO;
 import com.example.EJ2.infraestructure.repository.PersonaRepository;
@@ -24,11 +26,12 @@ public class ControllerEdit {
     private ModelMapper model;
 
     @PutMapping("/asignacion/{id}")
-    public ResponseEntity<PersonaDTO> modPerson(@PathVariable("id") int id, @RequestBody @Valid PersonaDTO personadto) throws Exception {
+    public ResponseEntity<PersonaDTO> modPerson(@PathVariable("id") int id, @RequestBody  PersonaDTO personadto) throws Exception {
         try {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(servicio.updPerson(id,personadto));
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+          //return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+            throw new UnprocesableException("Valores válidos");
         }
     }
 

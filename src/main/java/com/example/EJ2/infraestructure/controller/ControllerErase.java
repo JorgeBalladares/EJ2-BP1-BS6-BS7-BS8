@@ -1,5 +1,6 @@
 package com.example.EJ2.infraestructure.controller;
 
+import com.example.EJ2.Exception.Customizer.NotFoundException;
 import com.example.EJ2.application.PersonaImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class ControllerErase {
             servicio.deleteObj(id);
             return ResponseEntity.status(HttpStatus.OK).body("");
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+            //return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+            throw new NotFoundException("valor no existe");
         }
     }
 }
