@@ -1,5 +1,6 @@
-package com.example.EJ2;
+package com.example.EJ2.infraestructure.repository;
 
+import com.example.EJ2.domain.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

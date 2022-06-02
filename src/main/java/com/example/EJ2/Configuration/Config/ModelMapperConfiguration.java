@@ -1,4 +1,4 @@
-package com.example.EJ2;
+package com.example.EJ2.Configuration.Config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

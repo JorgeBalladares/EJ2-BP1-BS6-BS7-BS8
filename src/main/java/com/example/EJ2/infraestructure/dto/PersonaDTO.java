@@ -1,4 +1,4 @@
-package com.example.EJ2;
+package com.example.EJ2.infraestructure.dto;
 
 import lombok.Data;
 import java.util.Date;
