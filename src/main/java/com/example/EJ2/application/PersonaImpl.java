@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class PersonaImpl {
-
     @Autowired
     private PersonaRepository personaRepositorio;
     @Autowired

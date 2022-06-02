@@ -10,16 +10,16 @@ import java.util.Date;
 
 public class Persona {
     @Id
-    @GeneratedValue
-    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @NotBlank(message = "Usuario Obligatorio")
-    @Column (name = "usuario", nullable = false, length = 10)
+    @NotBlank(message = "valor usuario obligatorio")
+    @Column (name = "usuario", length = 10)
     private String usuario;
 
-    @NotBlank(message = "Password Obligatorio")
-    @Column (name = "password", nullable = false)
+    @NotBlank (message = "valor password obligatorio")
+    @Column (name = "password")
     private String password;
 
     @Column (name = "name", nullable = false)
@@ -48,4 +48,7 @@ public class Persona {
 
     @Column(name = "termination_date")
     private Date termination_date;
+
+
+
 }

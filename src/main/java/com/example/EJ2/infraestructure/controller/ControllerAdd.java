@@ -20,12 +20,12 @@ public class ControllerAdd {
     private ModelMapper model;
 
     @PostMapping(value = "/addPersona")
-    public ResponseEntity<PersonaDTO> addPerson(@RequestBody @Valid PersonaDTO p1Dto) throws Exception {
-        try {
+    public ResponseEntity<PersonaDTO> addPerson(@Valid @RequestBody PersonaDTO p1Dto) throws Exception {
+       //try {
             Persona p = servicio.addPersona(model.map(p1Dto, Persona.class));
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(model.map(p, PersonaDTO.class));
-        }catch (Exception e){
-           return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-        }
+        //}catch (Exception e) {
+          // return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+       //}
     }
 }
