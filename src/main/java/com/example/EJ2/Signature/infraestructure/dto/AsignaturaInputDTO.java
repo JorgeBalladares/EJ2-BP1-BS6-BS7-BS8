@@ -1,7 +1,6 @@
 package com.example.EJ2.Signature.infraestructure.dto;
 
 
-import com.example.EJ2.Student.domain.Entities.Student;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +8,11 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class Estudiante_asignaturaDTO {
-
+public class AsignaturaInputDTO {
 
     String id_asignatura;
 
-    private Student student;
+    private String student;
 
     String asignatura;
 
