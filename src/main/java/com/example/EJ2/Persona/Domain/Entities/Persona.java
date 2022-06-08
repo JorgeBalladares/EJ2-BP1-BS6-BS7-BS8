@@ -1,6 +1,8 @@
 package com.example.EJ2.Persona.Domain.Entities;
 
 
+import com.example.EJ2.Profesor.domain.Entities.Profesor;
+import com.example.EJ2.Student.domain.Entities.Student;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -51,6 +53,15 @@ public class Persona {
     @Column(name = "termination_date")
     private Date termination_date;
 
+
+    /*------ Establecemos la relación mediante @OnetoOne para
+    la búsqueda por ID si queremos saber si
+     un objeto ha sido ya asignado al id persona y evitar la duplicación --------*/
+
+    @OneToOne(mappedBy = "persona")
+    private Profesor rolProfesor;
+    @OneToOne(mappedBy = "persona")
+    private Student rolEstudiante;
 
 
 }

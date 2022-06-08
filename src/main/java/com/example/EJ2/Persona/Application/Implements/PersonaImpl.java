@@ -1,4 +1,4 @@
-package com.example.EJ2.Persona.Application.Implementaciones;
+package com.example.EJ2.Persona.Application.Implements;
 
 
 import com.example.EJ2.Exception.Customizer.UnprocesableException;
@@ -22,16 +22,16 @@ public class PersonaImpl implements PersonaService {
     private ModelMapper modelMapper;
     List<Persona> listaPerson ;
 
-
-    public Persona addPersona(Persona persona) throws Exception {
+    public PersonaDTO addPersona(PersonaDTO persona) throws Exception {
+        Persona p = modelMapper.map(persona, Persona.class);
         if (persona.getUsuario() == null || persona.getPassword() == null || persona.getName() == null || persona.getCompany_mail() == null
                 ||persona.getPersonal_email() == null ||persona.getCity() == null ||
                 persona.getActive() == null ||persona.getCreated_date() == null){throw new Exception("Faltan campos imprescindibles");}
         if (persona.getUsuario().length() > 10){throw new UnprocesableException("Valores no válidos");}
 
-        else return personaRepositorio.save(persona);
+        else personaRepositorio.save(p);
+            return modelMapper.map(p, PersonaDTO.class);
     }
-
 
     public PersonaDTO getByID(int ID) throws Exception {
         Optional<Persona> person = personaRepositorio.findById(ID);
@@ -92,6 +92,18 @@ public class PersonaImpl implements PersonaService {
 
     public void deleteObj(int id) throws Exception {
         personaRepositorio.deleteById(id);
+    }
+
+    public void CheckRoll (Persona person) throws Exception {
+        if (person.getRolProfesor()!=null){
+            throw new Exception("Persona asignada a un profesor");
+        }
+        else if(person.getRolEstudiante()!=null){
+            throw new Exception("Persona asignada a un estudiante");
+        }
+        else{
+            System.out.println("añadidos");
+        }
     }
 
 }

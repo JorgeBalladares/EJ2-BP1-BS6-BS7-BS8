@@ -1,9 +1,9 @@
 package com.example.EJ2.Profesor.infraestructure.ControllerProfesor;
 
 
-import com.example.EJ2.Profesor.application.Implementaciones.ProfesorImpl;
-import com.example.EJ2.Profesor.infraestructure.dto.Profesor.ProfesorInputDTO;
-import com.example.EJ2.Profesor.infraestructure.dto.Profesor.ProfesorOutDTO;
+import com.example.EJ2.Profesor.application.Implements.ProfesorImpl;
+import com.example.EJ2.Profesor.infraestructure.dto.InPuts.ProfesorInputDTO;
+import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutFullDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +16,7 @@ public class AddControlProf {
     private ProfesorImpl profServ;
 
     @PostMapping(value = "/addProfesor")
-    public ProfesorOutDTO addProfesor (@RequestBody ProfesorInputDTO inputDTO) throws  Exception{
+    public ProfesorOutFullDTO addProfesor (@RequestBody ProfesorInputDTO inputDTO) throws  Exception{
         return profServ.addProfesor(inputDTO);
     }
 }

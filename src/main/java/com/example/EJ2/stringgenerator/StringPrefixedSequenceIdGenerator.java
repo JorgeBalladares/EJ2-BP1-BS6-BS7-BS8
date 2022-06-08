@@ -6,12 +6,12 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
-import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
 
 import java.io.Serializable;
 import java.util.Properties;
+
 
 public class StringPrefixedSequenceIdGenerator extends SequenceStyleGenerator {
 

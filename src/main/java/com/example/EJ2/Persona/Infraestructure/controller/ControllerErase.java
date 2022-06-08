@@ -2,7 +2,7 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 
 import com.example.EJ2.Exception.Customizer.NotFoundException;
-import com.example.EJ2.Persona.Application.Implementaciones.PersonaImpl;
+import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

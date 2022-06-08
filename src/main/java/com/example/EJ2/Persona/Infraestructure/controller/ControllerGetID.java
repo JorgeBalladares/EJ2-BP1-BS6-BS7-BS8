@@ -2,7 +2,7 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 
 import com.example.EJ2.Exception.Customizer.NotFoundException;
-import com.example.EJ2.Persona.Application.Implementaciones.PersonaImpl;
+import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
 import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class ControllerGetID {
     private PersonaImpl servicio;
 
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/persona/{id}")
     public ResponseEntity<PersonaDTO> getById(@PathVariable("id") int id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(servicio.getByID(id));

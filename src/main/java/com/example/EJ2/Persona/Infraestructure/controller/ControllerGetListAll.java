@@ -1,7 +1,7 @@
 package com.example.EJ2.Persona.Infraestructure.controller;
 
 
-import com.example.EJ2.Persona.Application.Implementaciones.PersonaImpl;
+import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
 import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

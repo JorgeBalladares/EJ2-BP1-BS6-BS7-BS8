@@ -11,10 +11,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity(name = "Estudiante_asignatura")
+@Entity(name = "SignatureEntity")
 @Getter
 @Setter
-public class Estudiante_asignatura {
+public class SignatureEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "signatureGen")
@@ -24,27 +24,27 @@ public class Estudiante_asignatura {
             parameters = {
                     @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
                     @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value =
-                            "Signature"),
+                            "Sign"),
                     @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value =
                             "%08d")
             })
-    @Column(name = "id_asignatura")
-    String id_asignatura;
+    @Column(name = "id_asignatura", nullable=false)
+    private String codAsignatura;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn (name = "id_student")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "student")
     private Student student;
 
     @Column(name = "asignatura")
-    String asignatura;
+    private String asignatura;
 
     @Column (name = "coments")
-    String coments;
+    private String coments;
 
     @Column(name = "initial_date")
     @NotNull
-    Date initial_Date;
+    private Date initial_Date;
 
     @Column(name = "finish_date")
-    Date finish_date;
+    private Date finish_date;
 }

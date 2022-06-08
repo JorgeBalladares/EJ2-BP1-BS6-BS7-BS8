@@ -31,7 +31,7 @@ public class Student {
                             "%08d")
             })
     @Column(name = "id_student")
-    String id_student;
+    private String id_student;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona")
@@ -45,6 +45,7 @@ public class Student {
     private Profesor profesor;
 
     @Column (name = "branch")
-    String branch;
+    private String branch;
+
 
 }

@@ -2,7 +2,7 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 
 import com.example.EJ2.Exception.Customizer.UnprocesableException;
-import com.example.EJ2.Persona.Application.Implementaciones.PersonaImpl;
+import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
 import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ControllerEdit {
-
     @Autowired
     private PersonaImpl servicio;
     @Autowired

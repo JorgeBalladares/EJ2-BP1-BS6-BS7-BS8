@@ -2,6 +2,7 @@ package com.example.EJ2.Profesor.domain.Entities;
 
 
 import com.example.EJ2.Persona.Domain.Entities.Persona;
+import com.example.EJ2.Student.domain.Entities.Student;
 import com.example.EJ2.stringgenerator.StringPrefixedSequenceIdGenerator;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,5 +43,8 @@ public class Profesor {
     @NotNull
     @NotBlank
     private String branch;
+
+
+
 
 }
