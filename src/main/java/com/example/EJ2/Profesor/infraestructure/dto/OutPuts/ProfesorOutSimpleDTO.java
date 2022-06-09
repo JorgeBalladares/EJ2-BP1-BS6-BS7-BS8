@@ -1,6 +1,5 @@
 package com.example.EJ2.Profesor.infraestructure.dto.OutPuts;
 
-import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
 import lombok.Getter;
 import lombok.Setter;
 

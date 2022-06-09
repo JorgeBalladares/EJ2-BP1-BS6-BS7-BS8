@@ -5,7 +5,10 @@ import com.example.EJ2.Exception.Customizer.UnprocesableException;
 import com.example.EJ2.Persona.Application.Services.PersonaService;
 import com.example.EJ2.Persona.Domain.Entities.Persona;
 import com.example.EJ2.Persona.Domain.repositories.PersonaRepository;
-import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.EJ2.Persona.Infraestructure.dto.Outputs.PersonProfDTOOut;
+import com.example.EJ2.Persona.Infraestructure.dto.Outputs.PersonStudODTOOut;
+import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
+import com.example.EJ2.Persona.Infraestructure.dto.Outputs.PersonaOutSimpleDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,74 +20,75 @@ import java.util.stream.Collectors;
 @Service
 public class PersonaImpl implements PersonaService {
     @Autowired
-    private PersonaRepository personaRepositorio ;
+    private PersonaRepository personaRepositorio;
     @Autowired
     private ModelMapper modelMapper;
-    List<Persona> listaPerson ;
 
-    public PersonaDTO addPersona(PersonaDTO persona) throws Exception {
+    List<Persona> listaPerson;
+
+
+    public PersonaInputDTO addPersona(PersonaInputDTO persona) throws Exception {
         Persona p = modelMapper.map(persona, Persona.class);
         if (persona.getUsuario() == null || persona.getPassword() == null || persona.getName() == null || persona.getCompany_mail() == null
-                ||persona.getPersonal_email() == null ||persona.getCity() == null ||
-                persona.getActive() == null ||persona.getCreated_date() == null){throw new Exception("Faltan campos imprescindibles");}
-        if (persona.getUsuario().length() > 10){throw new UnprocesableException("Valores no válidos");}
-
-        else personaRepositorio.save(p);
-            return modelMapper.map(p, PersonaDTO.class);
-    }
-
-    public PersonaDTO getByID(int ID) throws Exception {
-        Optional<Persona> person = personaRepositorio.findById(ID);
-        if (person.isPresent()){
-            return modelMapper.map(person,PersonaDTO.class);
+                || persona.getPersonal_email() == null || persona.getCity() == null ||
+                persona.getActive() == null || persona.getCreated_date() == null) {
+            throw new Exception("Faltan campos imprescindibles");
         }
-        throw new Exception("Usuario no encontrado");
+        if (persona.getUsuario().length() > 10) {
+            throw new UnprocesableException("Valores no válidos");
+        } else personaRepositorio.save(p);
+        return modelMapper.map(p, PersonaInputDTO.class);
     }
 
-    public List<PersonaDTO> getPersonByName (String name){
+
+    public Object getByID(int id) throws Exception {
+        Optional<Persona> person = personaRepositorio.findById(id);
+        Persona p = modelMapper.map(person, Persona.class);
+        if (person.isPresent()) {
+            if (p.getProfesor() == null && p.getStudent() == null) {
+                return modelMapper.map(person, PersonaInputDTO.class);
+            } else {
+                if (p.getStudent() != null) {
+                    return modelMapper.map(person, PersonStudODTOOut.class);
+                }
+            }
+        }
+        return modelMapper.map(person, PersonProfDTOOut.class);
+    }
+
+
+    public List<PersonaInputDTO> getPersonByName(String name) {
         listaPerson = personaRepositorio.findByName(name);
         return listaPerson.stream()
-                .map(Persona -> modelMapper.map(Persona, PersonaDTO.class))
+                .map(Persona -> modelMapper.map(Persona, PersonaInputDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public PersonaDTO updPerson (int id, PersonaDTO personaDTO) throws Exception {
-        listaPerson = personaRepositorio.findAll();
-        PersonaDTO dto;
-        Persona personaNoDto=null;
-        for (Persona person : listaPerson) {
-            if (person.getId() == (id)) {
-                personaNoDto = person;
+    public PersonaOutSimpleDTO updPerson(int id, PersonaInputDTO personaInputDTO) throws Exception {
+        Optional<Persona> persona = personaRepositorio.findById(id);
+        Persona persona1 = modelMapper.map(persona, Persona.class);
+        Persona person = modelMapper.map(personaInputDTO, Persona.class);
+        if(!persona.isPresent()){
+            throw new Exception("No existe una persona con el id buscado");
+        }
+        else {
+            if(person.getId()==persona1.getId()) {
+                personaRepositorio.save(person);
+                return modelMapper.map(person, PersonaOutSimpleDTO.class);
             }
-        }
-        if(personaNoDto==null){
-            throw new Exception("null");
-        }
-        else{
-            personaNoDto.setId(id);
-            personaNoDto.setUsuario(personaDTO.getUsuario());
-            personaNoDto.setPassword(personaDTO.getPassword());
-            personaNoDto.setName(personaDTO.getName());
-            personaNoDto.setSurname(personaDTO.getSurname());
-            personaNoDto.setCompany_mail(personaDTO.getCompany_mail());
-            personaNoDto.setPersonal_email(personaDTO.getPersonal_email());
-            personaNoDto.setCity(personaDTO.getCity());
-            personaNoDto.setActive(personaDTO.getActive());
-            personaNoDto.setCreated_date(personaDTO.getCreated_date());
-            personaNoDto.setImagen_url(personaDTO.getImagen_url());
-            personaNoDto.setTermination_date(personaDTO.getTermination_date());
-            personaRepositorio.save(personaNoDto);
-            dto = modelMapper.map(personaRepositorio.findById(id), PersonaDTO.class);
-            return dto;
+            else {
+                throw new Exception("id no asignado, no se puede actualizar");
+            }
         }
     }
 
-    public List<PersonaDTO> getTotalList() throws Exception {
+
+    public List<PersonaInputDTO> getTotalList() throws Exception {
         List<Persona> lista = personaRepositorio.findAll();
 
-        if (lista!=null){
+        if (lista != null) {
             return lista.stream()
-                    .map(Persona -> modelMapper.map(Persona, PersonaDTO.class))
+                    .map(Persona -> modelMapper.map(Persona, PersonaInputDTO.class))
                     .collect(Collectors.toList());
         }
         throw new Exception("Lista vacía");
@@ -94,14 +98,12 @@ public class PersonaImpl implements PersonaService {
         personaRepositorio.deleteById(id);
     }
 
-    public void CheckRoll (Persona person) throws Exception {
-        if (person.getRolProfesor()!=null){
+    public void CheckRoll(Persona person) throws Exception {
+        if (person.getProfesor() != null) {
             throw new Exception("Persona asignada a un profesor");
-        }
-        else if(person.getRolEstudiante()!=null){
+        } else if (person.getStudent() != null) {
             throw new Exception("Persona asignada a un estudiante");
-        }
-        else{
+        } else {
             System.out.println("añadidos");
         }
     }

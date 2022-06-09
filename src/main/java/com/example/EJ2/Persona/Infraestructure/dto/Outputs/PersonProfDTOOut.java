@@ -1,17 +1,14 @@
-package com.example.EJ2.Persona.Infraestructure.dto;
+package com.example.EJ2.Persona.Infraestructure.dto.Outputs;
 
-
-
-import lombok.Getter;
-import lombok.Setter;
+import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutSimpleDTO;
+import com.example.EJ2.Student.infraestructure.dto.StudentSimpleDTO;
+import lombok.Data;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
+public class PersonProfDTOOut {
 
-
-public class PersonaDTO {
     private int id;
     private String usuario;
     private String password;
@@ -24,6 +21,6 @@ public class PersonaDTO {
     private Date created_date;
     private String imagen_url;
     private Date termination_date;
-
-
+    private ProfesorOutSimpleDTO profesor;
+    private StudentSimpleDTO student;
 }

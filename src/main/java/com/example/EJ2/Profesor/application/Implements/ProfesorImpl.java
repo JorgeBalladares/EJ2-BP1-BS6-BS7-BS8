@@ -32,10 +32,11 @@ public class ProfesorImpl implements ProfesorService {
         Optional<Persona> persona = repoPerson.findById(Integer.parseInt(inputDTO.getPersona()));
         if (persona.isPresent()){
             CheckRoll(model.map(persona, Persona.class));
-            Profesor p = model.map(inputDTO, Profesor.class);
-            p.setPersona(model.map(persona, Persona.class));
-            repoProf.save(p);
-            return model.map(p, ProfesorOutFullDTO.class);
+            Profesor profesor = model.map(inputDTO, Profesor.class);
+            profesor.setPersona(model.map(persona, Persona.class));
+            profesor.getPersona().setProfesor(profesor);
+            repoProf.save(profesor);
+            return model.map(profesor, ProfesorOutFullDTO.class);
         }
         throw new Exception("kases crack, para");
     }
@@ -45,10 +46,10 @@ public class ProfesorImpl implements ProfesorService {
                     @onetoone(mapped...)-------*/
 
     public void CheckRoll (Persona person) throws Exception {
-        if (person.getRolProfesor()!=null){
+        if (person.getProfesor()!=null){
             throw new Exception("Persona asignada a un profesor");
         }
-        else if(person.getRolEstudiante()!=null){
+        else if(person.getStudent()!=null){
             throw new Exception("Persona asignada a un estudiante");
         }
         else{

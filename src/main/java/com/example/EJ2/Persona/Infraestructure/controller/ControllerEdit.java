@@ -3,7 +3,8 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 import com.example.EJ2.Exception.Customizer.UnprocesableException;
 import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
-import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
+import com.example.EJ2.Persona.Infraestructure.dto.Outputs.PersonaOutSimpleDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,14 @@ public class ControllerEdit {
     private ModelMapper model;
 
     @PutMapping("/asignacion/{id}")
-    public ResponseEntity<PersonaDTO> modPerson(@PathVariable("id") int id, @RequestBody PersonaDTO person) throws Exception {
-        try {
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(servicio.updPerson(id,person));
-        }catch (Exception e){
+    public PersonaOutSimpleDTO modPerson(@PathVariable("id") int id, @RequestBody PersonaInputDTO person) throws Exception {
+        return servicio.updPerson(id, person);
+        //try {
+            //return ResponseEntity.status(HttpStatus.ACCEPTED).body(servicio.updPerson(id,person));
+        //}catch (Exception e){
             //return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-            throw new UnprocesableException("Valores válidos");
-        }
+          //  throw new UnprocesableException("Valores válidos");
+        //}
     }
 
 }

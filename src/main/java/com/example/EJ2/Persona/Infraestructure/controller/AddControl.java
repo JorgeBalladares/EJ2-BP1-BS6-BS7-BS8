@@ -2,8 +2,7 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 
 import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
-import com.example.EJ2.Persona.Domain.Entities.Persona;
-import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +23,9 @@ public class AddControl {
     @PostMapping(value = "/addPersona")
     //Al haber etiqueta Valid recogera el error 400 del HandlerControlAdvice y si se comenta esta clase genera error 500
     //ya que no sabe que error recoger y envía el genérico. Es algo raro de entender
-    public ResponseEntity<PersonaDTO> addPerson(@RequestBody @Valid PersonaDTO p1Dto) throws Exception {
+    public ResponseEntity<PersonaInputDTO> addPerson(@RequestBody @Valid PersonaInputDTO p1Dto) throws Exception {
         //try {
-        PersonaDTO p = servicio.addPersona(p1Dto);
+        PersonaInputDTO p = servicio.addPersona(p1Dto);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(p);
         //}catch (Exception e) {
         // return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();

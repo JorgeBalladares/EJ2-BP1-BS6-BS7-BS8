@@ -3,6 +3,7 @@ package com.example.EJ2.Student.domain.Entities;
 
 import com.example.EJ2.Persona.Domain.Entities.Persona;
 import com.example.EJ2.Profesor.domain.Entities.Profesor;
+import com.example.EJ2.Signature.domain.Entities.SignatureEntity;
 import com.example.EJ2.stringgenerator.StringPrefixedSequenceIdGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,8 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Student")
 @Getter
@@ -47,5 +50,7 @@ public class Student {
     @Column (name = "branch")
     private String branch;
 
+    @OneToMany (mappedBy = "student", fetch = FetchType.EAGER)
+    private List<SignatureEntity> signatures = new ArrayList<>();
 
 }

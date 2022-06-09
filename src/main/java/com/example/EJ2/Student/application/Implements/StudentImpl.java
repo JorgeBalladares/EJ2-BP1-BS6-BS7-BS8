@@ -4,6 +4,7 @@ import com.example.EJ2.Persona.Domain.Entities.Persona;
 import com.example.EJ2.Persona.Domain.repositories.PersonaRepository;
 import com.example.EJ2.Profesor.domain.Entities.Profesor;
 import com.example.EJ2.Profesor.domain.repositories.ProfesorRepository;
+import com.example.EJ2.Signature.domain.repositories.SignatureRepository;
 import com.example.EJ2.Student.application.Services.StudentService;
 import com.example.EJ2.Student.domain.Entities.Student;
 import com.example.EJ2.Student.domain.repositories.StudentRepository;
@@ -27,23 +28,26 @@ public class StudentImpl implements StudentService {
     private PersonaRepository repoPerson;
     @Autowired
     private ProfesorRepository repoProf;
+    @Autowired
+    private SignatureRepository repoSign;
 
 
     public StudentOutputDTOFull addStudent(StudentInputDTO inputDTO) throws Exception {
         Optional<Profesor> profe = repoProf.findById(inputDTO.getProfesor());
         Optional<Persona> persona = repoPerson.findById(Integer.parseInt(inputDTO.getPersona()));
-        Student s = model.map(inputDTO, Student.class);
+        Student student = model.map(inputDTO, Student.class);
         if (!profe.isPresent()) {
-            throw new Exception("PARA, CRACK");
+            throw new Exception("Profesor con ese id no existe");
         }
         if(!persona.isPresent()) {
-            throw new Exception("PARA, CRACK");
+            throw new Exception("persona con ese id no existe");
         }
         CheckRoll(model.map(persona, Persona.class)); //Comprobación previa si esta asignado el id ya a otro objeto
-        s.setPersona(model.map(persona, Persona.class));
-        s.setProfesor(model.map(profe, Profesor.class));
-        repoStudent.save(s);
-        return model.map(s, StudentOutputDTOFull.class);
+        student.setPersona(model.map(persona, Persona.class));
+        student.setProfesor(model.map(profe, Profesor.class));
+        student.getPersona().setStudent(student); //al ser relacion onetoone hacemos que sea ciclico
+        repoStudent.save(student);
+        return model.map(student, StudentOutputDTOFull.class);
     }
 
     public Object findId (String id, String outputType) throws Exception {
@@ -52,6 +56,7 @@ public class StudentImpl implements StudentService {
             throw new Exception("No existe");
         }
         if(outputType.equals("full")) {
+
             return model.map(student, StudentOutputDTOFull.class);
         }
         else {
@@ -63,10 +68,10 @@ public class StudentImpl implements StudentService {
     se establece en la entidad persona la relacion
                     @onetoone(mapped...)-------*/
     public void CheckRoll (Persona person) throws Exception {
-        if (person.getRolProfesor()!=null){
+        if (person.getProfesor()!=null){
             throw new Exception("Persona asignada a un profesor");
         }
-        else if(person.getRolEstudiante()!=null){
+        else if(person.getStudent()!=null){
             throw new Exception("Persona asignada a un estudiante");
         }
         else{

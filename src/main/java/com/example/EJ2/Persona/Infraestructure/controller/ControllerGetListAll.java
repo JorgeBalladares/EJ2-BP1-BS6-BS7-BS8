@@ -2,7 +2,7 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 
 import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
-import com.example.EJ2.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class ControllerGetListAll {
     private ModelMapper model;
 
     @GetMapping(value = "/allDisplay")
-    public ResponseEntity<List<PersonaDTO>> getAllData() throws Exception {
+    public ResponseEntity<List<PersonaInputDTO>> getAllData() throws Exception {
         if (servicio.getTotalList().isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(servicio.getTotalList());
         }

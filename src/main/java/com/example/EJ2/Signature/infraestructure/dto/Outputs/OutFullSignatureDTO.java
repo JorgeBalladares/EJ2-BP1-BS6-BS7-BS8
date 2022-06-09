@@ -1,6 +1,7 @@
 package com.example.EJ2.Signature.infraestructure.dto.Outputs;
 
 import com.example.EJ2.Student.infraestructure.dto.StudentOutputDTOFull;
+import com.example.EJ2.Student.infraestructure.dto.StudentSimpleDTO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ public class OutFullSignatureDTO {
 
     private String codAsignatura;
 
-    private StudentOutputDTOFull student;
+    private StudentSimpleDTO student;
 
     private String asignatura;
 

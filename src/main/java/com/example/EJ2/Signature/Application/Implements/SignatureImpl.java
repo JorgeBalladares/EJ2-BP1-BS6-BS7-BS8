@@ -1,6 +1,7 @@
 package com.example.EJ2.Signature.Application.Implements;
 
 
+import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
 import com.example.EJ2.Profesor.domain.Entities.Profesor;
 import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutFullDTO;
 import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutSimpleDTO;
@@ -16,7 +17,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SignatureImpl implements SignatureServices {
@@ -55,5 +58,16 @@ public class SignatureImpl implements SignatureServices {
             return model.map(signaOptional, OutSimpleSingatureDTO.class);
         }
     }
+
+    public List<OutSimpleSingatureDTO> getAllSignatureByID(String id) throws Exception {
+        Optional<Student> s = repoStudent.findById(id);
+        Student stud = model.map(s, Student.class);
+        if(s.isPresent()){
+            List<SignatureEntity> lista = stud.getSignatures();
+            return lista.stream().map(SignatureEntity -> model.map(SignatureEntity, OutSimpleSingatureDTO.class)).collect(Collectors.toList());
+        }
+        throw new Exception("Estudiante no existe");
+    }
+
 
 }
