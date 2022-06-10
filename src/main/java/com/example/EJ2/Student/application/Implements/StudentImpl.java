@@ -4,7 +4,9 @@ import com.example.EJ2.Persona.Domain.Entities.Persona;
 import com.example.EJ2.Persona.Domain.repositories.PersonaRepository;
 import com.example.EJ2.Profesor.domain.Entities.Profesor;
 import com.example.EJ2.Profesor.domain.repositories.ProfesorRepository;
+import com.example.EJ2.Signature.domain.Entities.SignatureEntity;
 import com.example.EJ2.Signature.domain.repositories.SignatureRepository;
+import com.example.EJ2.Signature.infraestructure.dto.Inputs.InputSimpleSignatureDTO;
 import com.example.EJ2.Student.application.Services.StudentService;
 import com.example.EJ2.Student.domain.Entities.Student;
 import com.example.EJ2.Student.domain.repositories.StudentRepository;
@@ -15,6 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -78,6 +81,26 @@ public class StudentImpl implements StudentService {
             System.out.println("añadidos");
         }
     }
+
+
+    public StudentSimpleDTO addSignaturebyID (String id, InputSimpleSignatureDTO signature) throws Exception {
+        Optional<Student> stud = repoStudent.findById(id);
+        Student student = model.map(stud, Student.class);
+        if (stud.isPresent()){
+            List<SignatureEntity> list = student.getSignatures();
+            SignatureEntity signa = model.map(signature, SignatureEntity.class);
+            signa.setStudent(student);
+            signa.getStudent().setId_student(id);
+            list.add(signa);
+            student.setSignatures(list);
+            repoSign.save(signa);
+            repoStudent.save(student);
+            return model.map(student, StudentSimpleDTO.class);
+        }
+        throw new Exception("No existe estudiante con ese Id");
+    }
+
+
 }
 
 
