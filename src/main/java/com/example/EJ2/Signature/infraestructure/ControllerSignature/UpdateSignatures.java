@@ -15,9 +15,9 @@ public class UpdateSignatures {
     @Autowired
     SignatureServiceImpl servSigna;
 
-    @PostMapping("/Signatures/{id}")
+    @PostMapping("/signature/update/{id}")
     public OutFullSignatureDTO updateSignature (@PathVariable ("id") String id, @RequestBody InputSignatureDTO inputSigna) throws Exception {
-        servSigna.updateSignature(id, inputSigna);
+        return servSigna.updateSignature(id, inputSigna);
     }
 
 }

@@ -82,17 +82,21 @@ public class SignatureServiceImpl implements SignatureServices {
         SignatureEntity signature = model.map(signa, SignatureEntity.class);
         SignatureEntity signature1 = model.map(inputSignature, SignatureEntity.class);
 
+
+
         if (!signa.isPresent()){
             throw new Exception( "Asignatura no existe");
         }
         else {
-            if(signature.getCodAsignatura()==signature1.getCodAsignatura()){
-                repoSignature.save(signature1);
-                return model.map(signature1, OutFullSignatureDTO.class);
-            }
-            else {
-                throw new Exception("Id no asignado, no se puede actualizar");
-            }
+            signature1.setCodAsignatura(signature.getCodAsignatura());
+            signature1.setStudent(signature.getStudent());
+            signature1.setComents(signature.getComents());
+            signature1.setInitial_Date(signature.getInitial_Date());
+            signature1.setFinish_date(signature.getFinish_date());
+            signature.setStudent(signature.getStudent());
+            repoSignature.saveAndFlush(model.map(signature1, SignatureEntity.class));
+            return model.map(signature1, OutFullSignatureDTO.class);
+
         }
     }
 
