@@ -1,7 +1,7 @@
 package com.example.EJ2.Persona.Infraestructure.controller;
 
 
-import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
+import com.example.EJ2.Persona.Application.UserCases.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ControllerGetID {
     @Autowired
-    private PersonaImpl servicio;
+    private PersonaServiceImpl servicio;
 
 
     @GetMapping(value = "/persona/{id}")

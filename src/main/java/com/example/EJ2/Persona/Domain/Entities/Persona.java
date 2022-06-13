@@ -4,16 +4,14 @@ package com.example.EJ2.Persona.Domain.Entities;
 import com.example.EJ2.Profesor.domain.Entities.Profesor;
 import com.example.EJ2.Student.domain.Entities.Student;
 import lombok.Data;
-import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity(name = "persona")
 @Data
-@Setter
+
+
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +58,8 @@ public class Persona {
 
     @OneToOne(mappedBy = "persona")
     private Student student;
+
+
 
 
 }

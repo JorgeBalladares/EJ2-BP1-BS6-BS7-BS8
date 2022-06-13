@@ -2,7 +2,7 @@ package com.example.EJ2.Persona.Infraestructure.controller;
 
 
 import com.example.EJ2.Exception.Customizer.NotFoundException;
-import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
+import com.example.EJ2.Persona.Application.UserCases.PersonaServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ControllerErase {
 
     @Autowired
-    private PersonaImpl servicio;
+    private PersonaServiceImpl servicio;
     @Autowired
     private ModelMapper model;
 

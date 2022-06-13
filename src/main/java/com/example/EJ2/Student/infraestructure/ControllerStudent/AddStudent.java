@@ -1,7 +1,7 @@
 package com.example.EJ2.Student.infraestructure.ControllerStudent;
 
 import com.example.EJ2.Signature.infraestructure.dto.Inputs.InputSimpleSignatureDTO;
-import com.example.EJ2.Student.application.Implements.StudentImpl;
+import com.example.EJ2.Student.application.UserCase.StudentServiceImpl;
 import com.example.EJ2.Student.infraestructure.dto.StudentOutputDTOFull;
 import com.example.EJ2.Student.infraestructure.dto.StudentInputDTO;
 import com.example.EJ2.Student.infraestructure.dto.StudentSimpleDTO;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AddStudent {
 
     @Autowired
-    private StudentImpl servStudent;
+    private StudentServiceImpl servStudent;
 
     @PostMapping(value = "/addStudent")
     public StudentOutputDTOFull addStudent (@RequestBody StudentInputDTO StuInputDTO) throws Exception {
@@ -26,5 +26,7 @@ public class AddStudent {
     public StudentSimpleDTO addSignatureToStudent (@PathVariable ("id") String id, @RequestBody InputSimpleSignatureDTO signature) throws Exception {
         return servStudent.addSignaturebyID(id, signature);
     }
+
+
 
 }

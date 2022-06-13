@@ -1,4 +1,4 @@
-package com.example.EJ2.Persona.Application.Implements;
+package com.example.EJ2.Persona.Application.UserCases;
 
 
 import com.example.EJ2.Exception.Customizer.UnprocesableException;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PersonaImpl implements PersonaService {
+public class PersonaServiceImpl implements PersonaService {
     @Autowired
     private PersonaRepository personaRepositorio;
     @Autowired

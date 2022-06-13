@@ -1,7 +1,7 @@
 package com.example.EJ2.Persona.Infraestructure.controller;
 
 
-import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
+import com.example.EJ2.Persona.Application.UserCases.PersonaServiceImpl;
 import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RestController
 public class AddControl {
     @Autowired
-    private PersonaImpl servicio;
+    private PersonaServiceImpl servicio;
     @Autowired
     private ModelMapper model;
 

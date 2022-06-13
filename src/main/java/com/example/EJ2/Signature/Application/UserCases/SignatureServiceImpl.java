@@ -1,10 +1,6 @@
-package com.example.EJ2.Signature.Application.Implements;
+package com.example.EJ2.Signature.Application.UserCases;
 
 
-import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
-import com.example.EJ2.Profesor.domain.Entities.Profesor;
-import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutFullDTO;
-import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutSimpleDTO;
 import com.example.EJ2.Signature.Application.Service.SignatureServices;
 import com.example.EJ2.Signature.domain.Entities.SignatureEntity;
 import com.example.EJ2.Signature.domain.repositories.SignatureRepository;
@@ -22,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class SignatureImpl implements SignatureServices {
+public class SignatureServiceImpl implements SignatureServices {
 
     @Autowired
     private StudentRepository repoStudent;
@@ -67,6 +63,37 @@ public class SignatureImpl implements SignatureServices {
             return lista.stream().map(SignatureEntity -> model.map(SignatureEntity, OutSimpleSingatureDTO.class)).collect(Collectors.toList());
         }
         throw new Exception("Estudiante no existe");
+    }
+
+    public List<OutFullSignatureDTO> getSignatures() throws Exception {
+
+        List<SignatureEntity> lista = repoSignature.findAll();
+
+        if(lista != null){
+            return lista.stream().map(SignatureEntity -> model.map(SignatureEntity, OutFullSignatureDTO.class)).collect(Collectors.toList());
+        }
+        throw new Exception("Lista de asignaturas vacía");
+    }
+
+
+    public OutFullSignatureDTO updateSignature (String id, InputSignatureDTO inputSignature) throws Exception {
+
+        Optional<SignatureEntity> signa = repoSignature.findById(id);
+        SignatureEntity signature = model.map(signa, SignatureEntity.class);
+        SignatureEntity signature1 = model.map(inputSignature, SignatureEntity.class);
+
+        if (!signa.isPresent()){
+            throw new Exception( "Asignatura no existe");
+        }
+        else {
+            if(signature.getCodAsignatura()==signature1.getCodAsignatura()){
+                repoSignature.save(signature1);
+                return model.map(signature1, OutFullSignatureDTO.class);
+            }
+            else {
+                throw new Exception("Id no asignado, no se puede actualizar");
+            }
+        }
     }
 
 

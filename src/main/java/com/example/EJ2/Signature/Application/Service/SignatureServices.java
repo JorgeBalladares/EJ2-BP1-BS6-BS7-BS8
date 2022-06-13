@@ -14,5 +14,9 @@ public interface SignatureServices {
 
     public List<OutSimpleSingatureDTO> getAllSignatureByID(String id) throws Exception;
 
+    public List<OutFullSignatureDTO> getSignatures() throws Exception;
 
-    }
+    public OutFullSignatureDTO updateSignature (String id, InputSignatureDTO inputSignature) throws Exception;
+
+
+}

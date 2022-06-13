@@ -1,4 +1,4 @@
-package com.example.EJ2.Profesor.application.Implements;
+package com.example.EJ2.Profesor.application.UserCases;
 
 
 
@@ -10,8 +10,6 @@ import com.example.EJ2.Profesor.domain.repositories.ProfesorRepository;
 import com.example.EJ2.Profesor.infraestructure.dto.InPuts.ProfesorInputDTO;
 import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutFullDTO;
 import com.example.EJ2.Profesor.infraestructure.dto.OutPuts.ProfesorOutSimpleDTO;
-import com.example.EJ2.Student.infraestructure.dto.StudentOutputDTOFull;
-import com.example.EJ2.Student.infraestructure.dto.StudentSimpleDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProfesorImpl implements ProfesorService {
+public class ProfesorServiceImpl implements ProfesorService {
     @Autowired
     private ProfesorRepository repoProf;
     @Autowired

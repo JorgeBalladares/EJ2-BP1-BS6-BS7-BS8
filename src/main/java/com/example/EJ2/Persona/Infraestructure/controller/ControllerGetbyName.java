@@ -1,7 +1,7 @@
 package com.example.EJ2.Persona.Infraestructure.controller;
 
 
-import com.example.EJ2.Persona.Application.Implements.PersonaImpl;
+import com.example.EJ2.Persona.Application.UserCases.PersonaServiceImpl;
 import com.example.EJ2.Persona.Infraestructure.dto.Inputs.PersonaInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class ControllerGetbyName {
     @Autowired
-    private PersonaImpl servicio;
+    private PersonaServiceImpl servicio;
 
     /*
     @GetMapping(value = "/nombre/{name}")

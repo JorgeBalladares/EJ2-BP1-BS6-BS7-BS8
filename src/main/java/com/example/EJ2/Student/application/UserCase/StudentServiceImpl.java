@@ -1,4 +1,4 @@
-package com.example.EJ2.Student.application.Implements;
+package com.example.EJ2.Student.application.UserCase;
 
 import com.example.EJ2.Persona.Domain.Entities.Persona;
 import com.example.EJ2.Persona.Domain.repositories.PersonaRepository;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentImpl implements StudentService {
+public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository repoStudent;
@@ -52,6 +52,7 @@ public class StudentImpl implements StudentService {
         repoStudent.save(student);
         return model.map(student, StudentOutputDTOFull.class);
     }
+
 
     public Object findId (String id, String outputType) throws Exception {
                 Optional<Student> student = repoStudent.findById(id);
@@ -95,6 +96,29 @@ public class StudentImpl implements StudentService {
             student.setSignatures(list);
             repoSign.save(signa);
             repoStudent.save(student);
+            return model.map(student, StudentSimpleDTO.class);
+        }
+        throw new Exception("No existe estudiante con ese Id");
+    }
+
+    public StudentSimpleDTO removeSignature (String idSignature, String id) throws Exception {
+
+        Optional<Student> stud = repoStudent.findById(id);
+        Student student = model.map(stud, Student.class);
+        List<SignatureEntity> listaSignature = student.getSignatures();
+        Optional<SignatureEntity> signa = repoSign.findById(idSignature);
+        SignatureEntity signature = model.map(signa, SignatureEntity.class);
+
+        if (stud.isPresent()){
+            if (!listaSignature.contains(signature)) {
+                throw new Exception("El usuario no dispone de dicha asignatura");
+            }
+
+            listaSignature.remove(signature);
+            student.setSignatures(listaSignature);
+            signature.setStudent(null);
+            repoStudent.save(student);
+            repoSign.save(signature);
             return model.map(student, StudentSimpleDTO.class);
         }
         throw new Exception("No existe estudiante con ese Id");

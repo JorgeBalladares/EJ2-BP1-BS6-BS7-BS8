@@ -8,10 +8,17 @@ import java.util.List;
 
 public interface PersonaService {
         public PersonaInputDTO addPersona(PersonaInputDTO persona) throws Exception;
+
         public Object getByID(int ID) throws Exception;
+
         public List<PersonaInputDTO> getPersonByName (String name);
+
         public PersonaOutSimpleDTO updPerson(int id, PersonaInputDTO personaInputDTO) throws Exception;
+
         public List<PersonaInputDTO> getTotalList() throws Exception;
+
         public void deleteObj(int id) throws Exception;
+
+
 
 }
