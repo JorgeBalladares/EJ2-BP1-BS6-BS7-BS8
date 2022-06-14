@@ -1,8 +1,8 @@
 package com.example.EJ2.Signature.Application.Service;
 
-import com.example.EJ2.Signature.infraestructure.dto.Inputs.InputSignatureDTO;
-import com.example.EJ2.Signature.infraestructure.dto.Outputs.OutFullSignatureDTO;
-import com.example.EJ2.Signature.infraestructure.dto.Outputs.OutSimpleSingatureDTO;
+import com.example.EJ2.Signature.Infraestructure.DTO.Inputs.InputSignatureDTO;
+import com.example.EJ2.Signature.Infraestructure.DTO.Outputs.OutFullSignatureDTO;
+import com.example.EJ2.Signature.Infraestructure.DTO.Outputs.OutSimpleSingatureDTO;
 
 import java.util.List;
 

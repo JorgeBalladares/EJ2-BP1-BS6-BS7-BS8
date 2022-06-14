@@ -1,8 +1,8 @@
 package com.example.EJ2.Persona.Domain.Entities;
 
 
-import com.example.EJ2.Profesor.domain.Entities.Profesor;
-import com.example.EJ2.Student.domain.Entities.Student;
+import com.example.EJ2.Profesor.Domain.Entities.Profesor;
+import com.example.EJ2.Student.Domain.Entities.Student;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

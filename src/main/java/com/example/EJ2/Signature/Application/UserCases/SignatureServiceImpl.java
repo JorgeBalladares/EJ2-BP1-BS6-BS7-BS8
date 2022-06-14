@@ -2,13 +2,13 @@ package com.example.EJ2.Signature.Application.UserCases;
 
 
 import com.example.EJ2.Signature.Application.Service.SignatureServices;
-import com.example.EJ2.Signature.domain.Entities.SignatureEntity;
-import com.example.EJ2.Signature.domain.repositories.SignatureRepository;
-import com.example.EJ2.Signature.infraestructure.dto.Inputs.InputSignatureDTO;
-import com.example.EJ2.Signature.infraestructure.dto.Outputs.OutFullSignatureDTO;
-import com.example.EJ2.Signature.infraestructure.dto.Outputs.OutSimpleSingatureDTO;
-import com.example.EJ2.Student.domain.Entities.Student;
-import com.example.EJ2.Student.domain.repositories.StudentRepository;
+import com.example.EJ2.Signature.Domain.Entities.SignatureEntity;
+import com.example.EJ2.Signature.Domain.repositories.SignatureRepository;
+import com.example.EJ2.Signature.Infraestructure.DTO.Inputs.InputSignatureDTO;
+import com.example.EJ2.Signature.Infraestructure.DTO.Outputs.OutFullSignatureDTO;
+import com.example.EJ2.Signature.Infraestructure.DTO.Outputs.OutSimpleSingatureDTO;
+import com.example.EJ2.Student.Domain.Entities.Student;
+import com.example.EJ2.Student.Domain.repositories.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
